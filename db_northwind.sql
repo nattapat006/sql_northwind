@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2019 at 06:31 PM
+-- Generation Time: Nov 13, 2019 at 09:16 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -43,7 +43,8 @@ INSERT INTO `categories` (`id_categoryid`, `categoryname`, `description`, `pictu
 ('001', 'candy', 'candy', 'candy'),
 ('003', 'water', 'water', 'water'),
 ('004', 'Sextoy', 'Sextoy', 'Sextoy'),
-('005', 'guitar', 'guitar', 'guitar');
+('005', 'guitar', 'guitar', 'guitar'),
+('002', 'Milk', 'Milk', 'Milk');
 
 -- --------------------------------------------------------
 
@@ -94,6 +95,34 @@ INSERT INTO `employees` (`id_employeeid`, `firstname`, `lastname`, `title`, `bir
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `myorderdetails_temp`
+--
+
+CREATE TABLE `myorderdetails_temp` (
+  `orderid` int(11) DEFAULT NULL,
+  `productid` varchar(40) NOT NULL,
+  `unitprice` varchar(40) NOT NULL,
+  `quantity` varchar(40) NOT NULL,
+  `discount` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `myorders_temp`
+--
+
+CREATE TABLE `myorders_temp` (
+  `orderid` int(11) DEFAULT NULL,
+  `customerid` varchar(40) NOT NULL,
+  `employeeid` varchar(40) NOT NULL,
+  `orderdate` varchar(40) NOT NULL,
+  `requireddate` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orderdetails`
 --
 
@@ -111,7 +140,7 @@ CREATE TABLE `orderdetails` (
 
 INSERT INTO `orderdetails` (`orderid`, `productid`, `unitprice`, `quantity`, `discount`) VALUES
 (1111101, '1101', '30', '3', '0'),
-(1111102, '1102', '10', '1', '0'),
+(1111102, '1101', '10', '1', '0'),
 (1111103, '1103', '10', '2', '0'),
 (1111104, '1104', '599', '1', '50%'),
 (1111105, '1105', '5999', '1', '30%'),
@@ -119,7 +148,11 @@ INSERT INTO `orderdetails` (`orderid`, `productid`, `unitprice`, `quantity`, `di
 (1111107, '1104', '599', '2', '50%'),
 (1111108, '1105', '5999', '1', '10%'),
 (1111109, '1103', '10', '2', '0'),
-(1111110, '1102', '10', '2', '0');
+(1111110, '1102', '10', '2', '0'),
+(1111101, '1102', '10', '1', '0'),
+(1111101, '1103', '10', '2', '10%'),
+(1111102, '1105', '5999', '1', '10%'),
+(1111101, '1101', '3', '30', '0');
 
 -- --------------------------------------------------------
 
@@ -149,7 +182,8 @@ INSERT INTO `orders` (`orderid`, `customerid`, `employeeid`, `orderdate`, `requi
 (1111107, '12302', '111102', '20/11/62', '23/11/62'),
 (1111108, '12303', '111103', '23/11/62', '25/11/62'),
 (1111109, '12301', '111103', '25/11/62', '28/11/62'),
-(1111110, '12301', '111101', '28/11/62', '30/11/62');
+(1111110, '12301', '111101', '28/11/62', '30/11/62'),
+(1111101, '12301', '111101', '0.000585348281822684', '7701');
 
 -- --------------------------------------------------------
 
@@ -162,19 +196,20 @@ CREATE TABLE `products` (
   `productname` varchar(40) DEFAULT NULL,
   `supplierid` char(40) DEFAULT NULL,
   `categoryid` char(40) DEFAULT NULL,
-  `quantityperunit` char(40) DEFAULT NULL
+  `quantityperunit` char(40) DEFAULT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id_productid`, `productname`, `supplierid`, `categoryid`, `quantityperunit`) VALUES
-(1101, 'candy', '1001', '001', '30'),
-(1102, 'Milk', '1002', '002', '10'),
-(1103, 'water', '1003', '003', '10'),
-(1104, 'sextoy', '1004', '004', '599'),
-(1105, 'guitar', '1005', '005', '5999');
+INSERT INTO `products` (`id_productid`, `productname`, `supplierid`, `categoryid`, `quantityperunit`, `price`) VALUES
+(1101, 'candy', '1001', '001', '295', 30),
+(1102, 'Milk', '1002', '002', '86', 10),
+(1103, 'water', '1003', '003', '1000', 10),
+(1104, 'sextoy', '1004', '004', '100', 599),
+(1105, 'guitar', '1005', '005', '89', 5999);
 
 -- --------------------------------------------------------
 
